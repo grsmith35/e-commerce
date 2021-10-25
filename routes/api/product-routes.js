@@ -22,18 +22,6 @@ router.get('/', (req, res) => {
           'id',
           'category_name'
         ]
-      },
-      {
-        model: ProductTag,
-        attributes: [
-          'id',
-          'product_id',
-          'tag_id'
-        ],
-        include: {
-          model: Tag,
-          attributes: 'tag_name'
-        }
       }
     ]
   })
@@ -68,18 +56,6 @@ router.get('/:id', (req, res) => {
           'id',
           'category_name'
         ]
-      },
-      {
-        model: ProductTag,
-        attributes: [
-          'id',
-          'product_id',
-          'tag_id'
-        ],
-        include: {
-          model: Tag,
-          attributes: 'tag_name'
-        }
       }
     ]
   })

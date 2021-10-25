@@ -7,22 +7,18 @@ router.get('/', (req, res) => {
   // find all tags
   // be sure to include its associated Product data
   Tag.findAll({
-    attributes: [
-      'id',
-      'tag_name'
-    ],
-    include: {
-      model: ProductTag,
-      attributes: [
-        'id',
-        'product_id',
-        'tag_id'
-      ],
-      include: {
+    attributes: ['id', 'tag_name'],
+    include: [
+      {
         model: Product,
-        attributes: ['product_name']
+        attributes: [
+          'id',
+          'product_name',
+          'price',
+          'stock'
+        ]
       }
-    }
+    ]
   })
   .then(dbPostData => {res.json(dbPostData);})
   .catch(err => {
@@ -38,27 +34,23 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: [
-      'id',
-      'tag_name'
-    ],
-    include: {
-      model: ProductTag,
-      attributes: [
-        'id',
-        'product_id',
-        'tag_id'
-      ],
-      include: {
+    attributes: ['id', 'tag_name'],
+    include: [
+      {
         model: Product,
-        attributes: ['product_name']
+        attributes: [
+          'id',
+          'product_name',
+          'price',
+          'stock'
+        ]
       }
-    }
+    ]
   })
   .then(dbPostData => {res.json(dbPostData);})
   .catch(err => {
     console.log(err);
-    res.status(500).json({message: 'There was and issue getting all tags'});
+    res.status(500).json({message: 'There was no tag with this id'});
   })
 });
 
